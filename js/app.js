@@ -1,41 +1,16 @@
 
-let lista = [];
+let lista =[];
 
-let getJSONData = function(url){
-  let result = {};
+function desplegar() {
   
-  return fetch(url)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }else{
-      throw Error(response.statusText);
-    }
-  })
-  .then(function(response) {
-        result.status = 'ok';
-        result.data = response;
-        hideSpinner();
-        return result;
-  })
-  .catch(function(error) {
-      result.status = 'error';
-      result.data = error;
-      hideSpinner();
-      return result;
-  });
-}
-
-
-function desplegar(lista) {
   let contenido = "";
-  for (let i = 0; i < lista.length; i++) {
+  for (let dato of datos ) {
     contenido +=
-     '"<tr> <th>Ciudad</th> <th>Precio</th></tr><tr><td>"' +
-      lista.ciudad +
-      '"</td><td>"' +
-      lista.precio +
-      '"</td></tr>"';
+    `<tr> <th>Ciudad</th> <th>Precio</th></tr><tr><td> `+
+      dato.ciudad +
+      ` </td><td>` +
+      dato.precio +
+      `</td></tr>`;
   };
   document.getElementById("lista").innerHTML = contenido;
 };
@@ -43,11 +18,13 @@ function desplegar(lista) {
 
 
 
+
+
 document.addEventListener("DOMContentLoaded",()=>{
-  getJSONData('/html/js/Datos.json').then( resultado =>{
-    if (resultado.status === "ok") {
-      lista = resultado.data;
-      desplegar();
-    }
+  fetch("json/Datos.json")
+  .then( resultado =>resultado.json ())
+ .then ((json) => {
+desplegar(json);
+ });
+    
   });
-});
