@@ -1,10 +1,8 @@
 
-let lista =[];
-
-function desplegar() {
+function desplegar(datos) {
   
   let contenido = "";
-  for (let dato of datos ) {
+  for (let dato of datos) {
     contenido +=
     `<tr> <th>Ciudad</th> <th>Precio</th></tr><tr><td> `+
       dato.ciudad +
@@ -20,11 +18,13 @@ function desplegar() {
 
 
 
+
 document.addEventListener("DOMContentLoaded",()=>{
-  fetch("json/Datos.json")
-  .then( resultado =>resultado.json ())
+  fetch("Carpeta/MOCK_DATA.json")
+.then(( response) => response.json ())
  .then ((json) => {
 desplegar(json);
  });
+});
     
-  });
+ 
