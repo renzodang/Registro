@@ -11,7 +11,7 @@ function desplegar(datos) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/Carpeta/MOCK_DATA.json")
+  fetch("Carpeta/MOCK_DATA.json")
     .then((response) => response.json())
     .then((json) => {
       desplegar(json);
